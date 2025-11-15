@@ -3,16 +3,16 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define SNOWFLAKE_COUNT 300
+#define SNOWFLAKE_COUNT 600
 #define MAX_AMPLITUDE 100
 #define MIN_AMPLITUDE 50
-#define SIZE 5
 
 struct snow_flake {
   double x;
   int y;
   double amplitude;
   double periods;
+  int size;
 };
 
 int random2(int min, int max) {
@@ -24,55 +24,51 @@ void populate(struct snow_flake *t) {
   t->y = random2(0, GetScreenHeight());
   t->amplitude = random2(-1, 1);
   t->periods = random2(1, 5);
+  t->size = random2(3,5);
 }
 
 
 int main() {
-    /* const int screenWidth = 800; */
-    /* const int screenHeight = 450; */
 
-    //SetConfigFlags(FLAG_WINDOW_TRANSPARENT | FLAG_WINDOW_UNDECORATED | FLAG_WINDOW_TOPMOST);
-	SetConfigFlags(FLAG_WINDOW_TRANSPARENT); // Configures window to be transparent
-	InitWindow(GetScreenWidth(), GetScreenHeight(), "Snow Land!");
-	SetWindowState(FLAG_WINDOW_UNDECORATED);
-	SetWindowState(FLAG_WINDOW_TOPMOST); // Hide border/titlebar; omit if you want them there.
-	SetWindowState(FLAG_WINDOW_MOUSE_PASSTHROUGH);
+  SetConfigFlags(FLAG_WINDOW_TRANSPARENT); 
+  InitWindow(GetScreenWidth(), GetScreenHeight(), "Snow Land!");
+  SetWindowState(FLAG_WINDOW_UNDECORATED);
+  SetWindowState(FLAG_WINDOW_TOPMOST); 
+  SetWindowState(FLAG_WINDOW_MOUSE_PASSTHROUGH);
 
 
-    /* InitWindow(screenWidth, screenHeight, "Transparent Raylib Window"); */
+  SetTargetFPS(60);
 
-    SetTargetFPS(60);
+  struct snow_flake flakes[SNOWFLAKE_COUNT];
+  for (int i = 0;i < SNOWFLAKE_COUNT;i++) {
+    populate(&flakes[i]);
+  }
 
-    struct snow_flake flakes[SNOWFLAKE_COUNT];
-    for (int i = 0;i < SNOWFLAKE_COUNT;i++) {
-      populate(&flakes[i]);
-    }
+  int iterator = 0;
+  
+  while (!WindowShouldClose()) {
+    BeginDrawing();
+    ClearBackground(BLANK); // Clear background with transparent color
 
-    int iterator = 0;
-    
-    while (!WindowShouldClose()) {
-      BeginDrawing();
-      ClearBackground(BLANK); // Clear background with transparent color
+    // Draw some elements on the transparent background
+    /* DrawText("Hello, Transparent World!", 100, 200, 20, BLACK); */
+    /* DrawRectangle(50, 50, 100, 100, Fade(RED, 0.7f)); // Draw a semi-transparent red rectangle */
 
-      // Draw some elements on the transparent background
-      /* DrawText("Hello, Transparent World!", 100, 200, 20, BLACK); */
-      /* DrawRectangle(50, 50, 100, 100, Fade(RED, 0.7f)); // Draw a semi-transparent red rectangle */
-
-      for(int i = 0; i < SNOWFLAKE_COUNT;i++) {
-        DrawRectangle(flakes[i].x, flakes[i].y, SIZE, SIZE, RAYWHITE);
-        flakes[i].x += flakes[i].amplitude * 0.4 * sin(1/flakes[i].periods * (iterator / 10000.));
-        flakes[i].x += flakes[i].amplitude * 0.4 * cos((1/flakes[i].periods*100) * (iterator / 10000.));
-        flakes[i].y += abs(flakes[i].amplitude) * 0.4 + random2(0,1);
-        if(flakes[i].y > GetScreenHeight()) {
-          flakes[i].y = 0;
-        }
-        /* printf("x: %d, y: %d", flakes[i].x, flakes[i].y); */
-        iterator ++;
+    for(int i = 0; i < SNOWFLAKE_COUNT;i++) {
+      DrawRectangle(flakes[i].x, flakes[i].y, flakes[i].size, flakes[i].size, RAYWHITE);
+      flakes[i].x += flakes[i].amplitude * 0.4 * sin(1/flakes[i].periods * (iterator / 10000.));
+      flakes[i].x += flakes[i].amplitude * 0.4 * cos((1/flakes[i].periods*100) * (iterator / 10000.));
+      flakes[i].y += abs(flakes[i].amplitude) * 0.4 + random2(0,1);
+      if(flakes[i].y > GetScreenHeight()) {
+        flakes[i].y = 0;
       }
-
-      EndDrawing();
+      /* printf("x: %d, y: %d", flakes[i].x, flakes[i].y); */
+      iterator ++;
     }
 
-    CloseWindow();
-    return 0;
+    EndDrawing();
+  }
+
+  CloseWindow();
+  return 0;
 }
