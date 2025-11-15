@@ -31,10 +31,15 @@ int main() {
     /* const int screenWidth = 800; */
     /* const int screenHeight = 450; */
 
-    SetConfigFlags(FLAG_WINDOW_TRANSPARENT | FLAG_WINDOW_UNDECORATED | FLAG_WINDOW_TOPMOST);
+    //SetConfigFlags(FLAG_WINDOW_TRANSPARENT | FLAG_WINDOW_UNDECORATED | FLAG_WINDOW_TOPMOST);
+	SetConfigFlags(FLAG_WINDOW_TRANSPARENT); // Configures window to be transparent
+	InitWindow(GetScreenWidth(), GetScreenHeight(), "Snow Land!");
+	SetWindowState(FLAG_WINDOW_UNDECORATED);
+	SetWindowState(FLAG_WINDOW_TOPMOST); // Hide border/titlebar; omit if you want them there.
+	SetWindowState(FLAG_WINDOW_MOUSE_PASSTHROUGH);
+
 
     /* InitWindow(screenWidth, screenHeight, "Transparent Raylib Window"); */
-    InitWindow(GetScreenWidth(), GetScreenHeight(), "Snow Land!");
 
     SetTargetFPS(60);
 
