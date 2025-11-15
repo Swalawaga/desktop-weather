@@ -6,7 +6,7 @@
 #define SNOWFLAKE_COUNT 600
 #define MAX_AMPLITUDE 100
 #define MIN_AMPLITUDE 50
-#define HAHA
+#define RAIN 0
 
 struct snow_flake {
   double x;
@@ -56,10 +56,17 @@ int main() {
     /* DrawRectangle(50, 50, 100, 100, Fade(RED, 0.7f)); // Draw a semi-transparent red rectangle */
 
     for(int i = 0; i < SNOWFLAKE_COUNT;i++) {
-      DrawRectangle(flakes[i].x, flakes[i].y, flakes[i].size, flakes[i].size, RAYWHITE);
+      if(RAIN) {
+        DrawRectangle(flakes[i].x, flakes[i].y, flakes[i].size, flakes[i].size, RAYWHITE);
+        flakes[i].y += abs(flakes[i].amplitude) * 0.4 + random2(0,1);
+      } else {
+        DrawRectangle(flakes[i].x, flakes[i].y, flakes[i].size, flakes[i].size+2, (Color) {0, 0, 255, 100});
+        flakes[i].y += abs(flakes[i].amplitude) + random2(0,1);
+      }
+      
       flakes[i].x += flakes[i].amplitude * 0.4 * sin(1/flakes[i].periods * (iterator / 10000.));
       flakes[i].x += flakes[i].amplitude * 0.4 * cos((1/flakes[i].periods*100) * (iterator / 10000.));
-      flakes[i].y += abs(flakes[i].amplitude) * 0.4 + random2(0,1);
+
       if(flakes[i].y > GetScreenHeight()) {
         flakes[i].y = 0;
       }
