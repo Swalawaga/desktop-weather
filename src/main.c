@@ -6,6 +6,7 @@
 #define SNOWFLAKE_COUNT 600
 #define MAX_AMPLITUDE 100
 #define MIN_AMPLITUDE 50
+#define HAHA
 
 struct snow_flake {
   double x;
