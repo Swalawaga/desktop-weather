@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <iostream>
+
+using namespace std;
 
 #define SNOWFLAKE_COUNT 600
 #define MAX_AMPLITUDE 100
