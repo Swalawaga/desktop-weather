@@ -3,7 +3,9 @@
 #include <stdlib.h>
 #include <math.h>
 #include <iostream>
+#include <string.h>
 #include "snowflake.h"
+#include "sun.h"
 
 using namespace std;
 
@@ -20,8 +22,13 @@ int main() {
   SetWindowState(FLAG_WINDOW_MOUSE_PASSTHROUGH);
   SetTargetFPS(60);
 
+  int weather = 1; //0=snowy 1=sunny
   int iterator = 0;
+
   Flake flakes[SNOWFLAKE_COUNT];
+
+  Sun sun = Sun();
+
   for(int i = 0; i < SNOWFLAKE_COUNT;i++) {
     flakes[i] = Flake();
   }
@@ -30,9 +37,15 @@ int main() {
     BeginDrawing();
     ClearBackground(BLANK);
 
-    for(int i = 0; i < SNOWFLAKE_COUNT;i++) {
-      flakes[i].draw(iterator);
+    switch(weather){
+      case 0:
+        for(int i = 0; i < SNOWFLAKE_COUNT;i++) {
+          flakes[i].draw(iterator);
+        }
+      case 1:
+        sun.draw(iterator);
     }
+
     iterator++;
 
     EndDrawing();
