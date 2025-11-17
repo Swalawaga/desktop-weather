@@ -5,7 +5,7 @@
 
 class Sun {
     private:
-        double x, y;
+        float x, y;
     public:
         Sun() ;
         void draw(int iterator) ;
