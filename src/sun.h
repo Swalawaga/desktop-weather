@@ -2,12 +2,19 @@
 #include <iostream>
 #include <raylib.h>
 
+#define FLARES 70
 
 class Sun {
-    private:
-        float x, y;
     public:
         Sun() ;
         void draw(int iterator) ;
-        int random2(int min, int max);
+        struct Flare{
+            Vector2 pos;
+            int size;
+            unsigned char alpha;
+        };
+        Flare flares[FLARES];
+    private:
+        float x, y;
+        
 };
