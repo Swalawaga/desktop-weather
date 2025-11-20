@@ -23,7 +23,10 @@ Sun::Sun() {
 }
 
 void Sun::draw(int iterator) {
-    x ++;
+  x ++;
+  if(x > GetScreenWidth()+20) {
+    x = -10;
+  }
     BeginBlendMode(BLEND_ADDITIVE);
     DrawCircleGradient(x,y,SIZE,(Color){255, 236, 80, 255},BLANK);
     DrawCircleGradient(x,y,SIZE*1.3,(Color){255, 236, 80, 200},BLANK);

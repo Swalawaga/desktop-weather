@@ -9,6 +9,6 @@ class Flake {
         int size;
     public:
         Flake() ;
-        void draw(int iterator) ;
+  void draw(int iterator) ;
         int random2(int min, int max);
 };
