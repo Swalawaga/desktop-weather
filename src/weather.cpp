@@ -48,7 +48,7 @@ int main() {
     switch(weather){
       case 0:
         for(int i = 0; i < SNOWFLAKE_COUNT;i++) {
-          flakes[i].draw(iterator, windSpeed);
+          flakes[i].draw(iterator);
         }
         break;
       case 1:
