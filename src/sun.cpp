@@ -8,6 +8,9 @@
 #define RAYS 100
 #define SPEED .05
 
+#define SUGMA
+
+
 Sun::Sun() {
 //   x = GetRandomValue(0,GetScreenWidth());
   x = 0;
