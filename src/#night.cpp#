@@ -20,6 +20,6 @@ Moon::Moon() {
 
 void Moon::draw(int iterator) {
   BeginShaderMode(bloom);
-  //IDK WHAT GOES HERE
+  
   EndShaderMode();
 }

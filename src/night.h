@@ -7,6 +7,7 @@ class Moon {
         Moon() ;
         void draw(int iterator) ;
     private:
-        float x, y;
+  float x, y;
+  Shader bloom;
         
 };
